@@ -25,7 +25,12 @@ const Authenticate = () =>{
                   headerStyle: {
                     backgroundColor: '#fff',
                   },
+                  
                   headerTintColor: '#000',headerTitleAlign:'center',
+                  headerLeft:()=>(<TouchableOpacity>
+                    <Icon name="menu" color="#000" size={35} style={{ marginLeft:20 }}/>
+                    </TouchableOpacity>),
+
                   headerRight:()=>(<TouchableOpacity onPress={()=>navigation.navigate('UserProfile')}>
                 <Icon
                   name='person' //"person-outline"
@@ -35,6 +40,7 @@ const Authenticate = () =>{
                   style={{ marginRight: 20}}
                 />
               </TouchableOpacity>)
+              
               }) } 
               />
              
