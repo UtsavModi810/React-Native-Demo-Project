@@ -16,7 +16,7 @@ class Bottomtab extends Component {
                 tabBarOptions={{
                     labelStyle: {fontSize: 15,},
                     activeTintColor: '#03506f',
-                    style:{height:65}
+                    style:{height:50}
                 }}
             >
                 <Tab.Screen
@@ -25,7 +25,7 @@ class Bottomtab extends Component {
                     options={{
                         tabBarLabel: 'Home',
                         tabBarIcon: ({ color, size }) => (
-                            <Icon name="home" color={color} size={20} />
+                            <Icon name="home" color={color} size={30} />
                         ),
                     }}
                 />
@@ -36,7 +36,7 @@ class Bottomtab extends Component {
                     options={{
                         tabBarLabel: 'Setting',
                         tabBarIcon: ({ color, size }) => (
-                            <Icon name="settings" color={color} size={20} />
+                            <Icon name="settings" color={color} size={30} />
                         ),
                     }}
                 />
