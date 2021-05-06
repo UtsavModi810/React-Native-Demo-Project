@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 20,
         marginVertical: 10,
-        backgroundColor: '#046582',
+        backgroundColor: '#03506f',
         flexDirection: 'row',
     },
     item: {

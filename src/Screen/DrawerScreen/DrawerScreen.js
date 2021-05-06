@@ -52,6 +52,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from '../Home/Home';
 import Setting from '../Setting/Setting';
 import Bottomtab from '../Bottomtab/Bottomtab';
+import UserProfile from '../UserProfile/UserProfile';
 
 // function HomeScreen({ navigation }) {
 //   return (
@@ -80,6 +81,7 @@ export default function DrawerScreen() {
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={Bottomtab} />
         <Drawer.Screen name="Setting" component={Setting} />
+        <Drawer.Screen name="UserProfile" component={UserProfile} />
       </Drawer.Navigator>
     // </NavigationContainer>
   );
