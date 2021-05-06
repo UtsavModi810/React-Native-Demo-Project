@@ -25,7 +25,7 @@ class Bottomtab extends Component {
                     options={{
                         tabBarLabel: 'Home',
                         tabBarIcon: ({ color, size }) => (
-                            <Icon name="home" color={color} size={30} />
+                            <Icon name="home" color={color} size={20} />
                         ),
                     }}
                 />
@@ -36,7 +36,7 @@ class Bottomtab extends Component {
                     options={{
                         tabBarLabel: 'Setting',
                         tabBarIcon: ({ color, size }) => (
-                            <Icon name="settings" color={color} size={30} />
+                            <Icon name="settings" color={color} size={20} />
                         ),
                     }}
                 />

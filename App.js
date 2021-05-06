@@ -13,6 +13,9 @@ import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import { TouchableOpacity } from 'react-native';
 import Bottomtab from './src/Screen/Bottomtab/Bottomtab';
 import RootNavigator from './src/router';
+import { Provider } from 'react-redux';
+import store from './src/Redux/store';
+
 
 
 const Stack = createStackNavigator();
@@ -20,7 +23,9 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return(
-    <RootNavigator/>
+    <Provider store={store}>
+      <RootNavigator/>
+    </Provider>
   )
   
 }

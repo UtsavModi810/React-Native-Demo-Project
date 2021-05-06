@@ -2,54 +2,61 @@ import React, { useState } from 'react';
 import { SafeAreaView, FlatList, StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
 import styles from './style';
 import Right from 'react-native-vector-icons/dist/MaterialIcons';
-
+import { fetchUserRequest } from '../../Redux/action';
+import { connect } from 'react-redux';
 import HomeDetail from '../HomeDetail/HomeDetail';
 
 import ComponentButton from '../../component/Button/ComponentButton';
 
 
 class Home extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            data: []
-        }
-    }
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         data: []
+    //     }
+    // }
+    // componentDidMount() {
+    //     console.log('home did Mount')
+    //     this.callApi();
+    // }
+    // async callApi() {
+
+    //     let resp = await fetch('https://reqres.in/api/users/')
+    //     let respjson = await resp.json()
+    //     console.log("respjson", respjson)
+    //     this.setState({ data: respjson })
+    //     console.log("data", this.state.data.data);
+
+    //     // fetch('https://jsonplaceholder.typicode.com/albums/1/photos')
+    //     //     .then((response) => response.json())
+    //     //     .then((json) => {
+    //     //         this.setState({ data: json[0] });
+    //     //         console.log("123",this.state.data.albumId);
+    //     //     })
+    //     //     .catch((error) => console.error(error))
+    //     //     .finally(() => {
+    //     //         this.setState({ isLoading: false });
+    //     //     });
+    // }
+
     componentDidMount() {
-        console.log('home did Mount')
-        this.callApi();
+        this.props.fetchUserRequest();
     }
-    async callApi() {
 
-        let resp = await fetch('https://reqres.in/api/users/')
-        let respjson = await resp.json()
-        console.log("respjson", respjson)
-        this.setState({ data: respjson })
-        console.log("data", this.state.data.data);
 
-        // fetch('https://jsonplaceholder.typicode.com/albums/1/photos')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this.setState({ data: json[0] });
-        //         console.log("123",this.state.data.albumId);
-        //     })
-        //     .catch((error) => console.error(error))
-        //     .finally(() => {
-        //         this.setState({ isLoading: false });
-        //     });
-    }
 
     render() {
         console.log('home render')
 
         return (
-            
+
             <View style={styles.container}>
-                
+
                 <FlatList
                     numColumns={1}
                     keyExtractor={(item) => item.id}
-                    data={this.state.data.data}
+                    data={this.props.data.data}
                     renderItem={({ item }) => {
                         return (
                             <SafeAreaView style={{ flex: 1 }}>
@@ -78,6 +85,25 @@ class Home extends React.Component {
                 />
             </View>
         )
+
     }
+
 }
-export default Home;
+    const mapStateToProps = state => {
+        console.log('STATE=', state);
+        console.log('STATE DATA=', state.data);
+
+        return {
+            loading: state.loading,
+            data: state.data,
+            error: state.error,
+        };
+
+    };
+    const mapDispatchToProps = dispatch => {
+        return {
+            fetchUserRequest: () => dispatch(fetchUserRequest()),
+        };
+    };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
