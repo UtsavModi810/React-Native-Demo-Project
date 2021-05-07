@@ -6,6 +6,7 @@ import ComponentButton from '../../component/Button/ComponentButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, StyleSheet, ScrollView,Image } from "react-native";
 import * as Animatable from 'react-native-animatable';
+import {CommonActions} from '@react-navigation/routers';
 
 class UserProfile extends Component {
     constructor(props) {
@@ -18,21 +19,21 @@ class UserProfile extends Component {
 
         }
     }
-    checkAuth = async () => {
-        // debugger
-        try {
-            let user = await AsyncStorage.getItem('Register');
-            let parsed = JSON.parse(user);
-            console.log('auth--', user)
-            //debugger
-            console.log("parsed-", parsed.email, parsed.password)
-            this.setState({ firstname: parsed.firstname, lastname: parsed.lastname, email: parsed.email, mobileno: parsed.mobileno })
+    // checkAuth = async () => {
+    //     // debugger
+    //     try {
+    //         let user = await AsyncStorage.getItem('Register');
+    //         let parsed = JSON.parse(user);
+    //         console.log('auth--', user)
+    //         //debugger
+    //         console.log("parsed-", parsed.email, parsed.password)
+    //         this.setState({ firstname: parsed.firstname, lastname: parsed.lastname, email: parsed.email, mobileno: parsed.mobileno })
 
 
-        } catch (error) {
-            alert(error);
-        }
-    };
+    //     } catch (error) {
+    //         alert(error);
+    //     }
+    // };
 
     componentDidMount() {
 
@@ -46,6 +47,31 @@ class UserProfile extends Component {
         // AsyncStorage.setItem('user', JSON.stringify(obj));
         this.checkAuth();
     }
+
+    checkAuth = async () =>{
+        var user = await AsyncStorage.getItem('Register');
+        var parsed = JSON.parse(user);
+        this.setState({
+            firstname:parsed.firstname,
+            lastname:parsed.lastname,
+            email:parsed.email,
+            mobileno:parsed.mobileno,
+        });
+        AsyncStorage.setItem('Register',JSON.stringify(user));
+
+    };
+
+    resetStack = CommonActions.reset({
+        index:0,
+        routes:[{name:'SplashScreen'}],
+    });
+    
+    removeAuthentication = async () =>{
+        try{
+            await AsyncStorage.clear();
+            this.props.navigation.dispatch(this.resetStack);
+        }catch(e){}
+    };
 
 
 
@@ -66,7 +92,7 @@ class UserProfile extends Component {
                         <Input iconName="email" value={this.state.email} />
                         <Input iconName="contact-page" value={this.state.mobileno} />
                     </View>
-                        <ComponentButton label="LOGOUT" onPress={() => this.props.navigation.navigate('Login')} />
+                        <ComponentButton label="LOGOUT" onPress={this.removeAuthentication} />
                      
                     </Animatable.View>
                 </View>

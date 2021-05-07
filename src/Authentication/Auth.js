@@ -39,8 +39,7 @@ class Auth extends Component {
         parsed.password === this.state.password
       )
        {// this.state.isAuthenticated=true;
-        alert('Hii from auth', parsed.email === this.state.email &&
-        parsed.password === this.state.password)
+        
         this.props.navigation.dispatch(this.resetToAuth);
        }
       else {
