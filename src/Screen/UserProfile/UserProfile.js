@@ -55,7 +55,7 @@ class UserProfile extends Component {
             firstname:parsed.firstname,
             lastname:parsed.lastname,
             email:parsed.email,
-            mobileno:parsed.mobileno,
+            phoneNo:parsed.phoneNo,
         });
         AsyncStorage.setItem('Register',JSON.stringify(user));
 
@@ -90,7 +90,7 @@ class UserProfile extends Component {
                         <Input iconName="person-pin-circle" value={this.state.firstname} />
                         <Input iconName="person-pin-circle" value={this.state.lastname} />
                         <Input iconName="email" value={this.state.email} />
-                        <Input iconName="contact-page" value={this.state.mobileno} />
+                        <Input iconName="contact-page" value={this.state.phoneNo} />
                     </View>
                         <ComponentButton label="LOGOUT" onPress={this.removeAuthentication} />
                      
