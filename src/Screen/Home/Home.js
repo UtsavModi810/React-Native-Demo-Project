@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, FlatList, StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, View, Text, Image, Button, TouchableOpacity,RefreshControl } from 'react-native';
 import styles from './style';
 import Right from 'react-native-vector-icons/dist/MaterialIcons';
 import { fetchUserRequest } from '../../Redux/action';
@@ -10,12 +10,12 @@ import ComponentButton from '../../component/Button/ComponentButton';
 
 
 class Home extends React.Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         data: []
-    //     }
-    // }
+    constructor() {
+        super();
+        this.state = {
+            refreshing:false,
+        }
+    }
     // componentDidMount() {
     //     console.log('home did Mount')
     //     this.callApi();
@@ -44,6 +44,11 @@ class Home extends React.Component {
         this.props.fetchUserRequest();
     }
 
+    onRefresh = ()=>{
+        this.setState({refreshing:true})
+        this.props.fetchUserRequest()
+        this.setState({refreshing:false})
+    }
 
 
     render() {
@@ -57,6 +62,7 @@ class Home extends React.Component {
                     numColumns={1}
                     keyExtractor={(item) => item.id}
                     data={this.props.data.data}
+                    refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh}/>}
                     renderItem={({ item }) => {
                         return (
                             <SafeAreaView style={{ flex: 1 }}>

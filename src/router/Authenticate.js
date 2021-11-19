@@ -10,6 +10,7 @@ import UserProfile from '../Screen/UserProfile/UserProfile';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import DrawerScreen from '../Screen/DrawerScreen/DrawerScreen';
+import GiphyScreen from '../Screen/GiphyScreen';
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,7 @@ const Authenticate = () =>{
              
             <Stack.Screen name={Routes.HomeDetail} component={HomeDetail}/>
             <Stack.Screen name={Routes.UserProfile} component={UserProfile}/>
+            <Stack.Screen name={Routes.GiphyScreen} component={GiphyScreen}/>
             <Stack.Screen name={Routes.Setting} component={Setting}/> 
         </Stack.Navigator>
     )

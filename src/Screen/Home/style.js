@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     text: {
-
+        alignSelf:'center',
         flex: 1,
         flexDirection: "row",
         flexWrap: "wrap",

@@ -11,6 +11,7 @@ const Routes={
     Setting:'Setting',
     Bottomtab:'Bottomtab',
     DrawerScreen:'DrawerScreen',
+    GiphyScreen:'GiphyScreen',
 }
 
 export default Routes;
