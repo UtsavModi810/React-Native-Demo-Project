@@ -10,35 +10,12 @@ import ComponentButton from '../../component/Button/ComponentButton';
 
 
 class Home extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             refreshing:false,
         }
     }
-    // componentDidMount() {
-    //     console.log('home did Mount')
-    //     this.callApi();
-    // }
-    // async callApi() {
-
-    //     let resp = await fetch('https://reqres.in/api/users/')
-    //     let respjson = await resp.json()
-    //     console.log("respjson", respjson)
-    //     this.setState({ data: respjson })
-    //     console.log("data", this.state.data.data);
-
-    //     // fetch('https://jsonplaceholder.typicode.com/albums/1/photos')
-    //     //     .then((response) => response.json())
-    //     //     .then((json) => {
-    //     //         this.setState({ data: json[0] });
-    //     //         console.log("123",this.state.data.albumId);
-    //     //     })
-    //     //     .catch((error) => console.error(error))
-    //     //     .finally(() => {
-    //     //         this.setState({ isLoading: false });
-    //     //     });
-    // }
 
     componentDidMount() {
         this.props.fetchUserRequest();
@@ -52,8 +29,6 @@ class Home extends React.Component {
 
 
     render() {
-        console.log('home render')
-
         return (
 
             <View style={styles.container}>
@@ -62,6 +37,7 @@ class Home extends React.Component {
                     numColumns={1}
                     keyExtractor={(item) => item.id}
                     data={this.props.data.data}
+                    showsVerticalScrollIndicator={false}
                     refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh}/>}
                     renderItem={({ item }) => {
                         return (
@@ -96,9 +72,6 @@ class Home extends React.Component {
 
 }
     const mapStateToProps = state => {
-        console.log('STATE=', state);
-        console.log('STATE DATA=', state.data);
-
         return {
             loading: state.loading,
             data: state.data,

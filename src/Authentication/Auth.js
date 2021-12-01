@@ -14,7 +14,6 @@ class Auth extends Component {
   }
  
   componentDidMount(){
-    console.log('componentDidMount Auth')
     const {email,password} = this.props.route.params;
     this.setState({email:email,password:password});
 
@@ -30,7 +29,6 @@ class Auth extends Component {
 
   checkAuthenticate = async () => {
     try {
-      console.log('hi from did check Auth')
       let user = await AsyncStorage.getItem('Register');
       let parsed = JSON.parse(user);
 
@@ -54,9 +52,7 @@ class Auth extends Component {
     }
   }
   
-    render() {
-      console.log('email render', this.state.email, '---', this.state.password);
-  
+    render() { 
       return (
         <View
           style={{

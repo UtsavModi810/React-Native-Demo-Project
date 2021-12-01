@@ -2,7 +2,6 @@ const initialState ={
     loading:false,
     data:[],
 }
-console.log('start',initialState.loading,initialState.data)
 
 const FetchApiReducer = (state = initialState,action) => {
     switch(action.type){

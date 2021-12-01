@@ -22,13 +22,11 @@ class SplashScreen extends Component{
   })
 
   componentDidMount() {
-    console.log('Splash didMount');
     this.checkAuthentication();
   }
 
   checkAuthentication = async () => {
     let authenticated = await AsyncStorage.getItem('Register');
-    console.log('checkAuth Authenticated val - ', authenticated);
     if (authenticated != null) {
       // this.setState({ isAuthenticated: true });
       this.goTo(true);
@@ -54,7 +52,7 @@ class SplashScreen extends Component{
     return (
       <View style={styles.SplashScreen_RootView}>
   
-        <Image source={require('../../assets/img/truck.gif')} style={styles.logo} />
+        <Image source={require('../../assets/img/Logo-porter.png')} style={styles.logo} />
   
       </View>
     );

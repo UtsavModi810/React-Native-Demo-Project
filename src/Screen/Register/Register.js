@@ -82,7 +82,6 @@ class Register extends Component {
         password:this.state.password,
       };
       AsyncStorage.setItem('Register',JSON.stringify(obj));
-      console.log(obj);
       this.props.navigation.navigate(Routes.Login);
 
     }

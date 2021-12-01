@@ -19,32 +19,8 @@ class UserProfile extends Component {
 
         }
     }
-    // checkAuth = async () => {
-    //     // debugger
-    //     try {
-    //         let user = await AsyncStorage.getItem('Register');
-    //         let parsed = JSON.parse(user);
-    //         console.log('auth--', user)
-    //         //debugger
-    //         console.log("parsed-", parsed.email, parsed.password)
-    //         this.setState({ firstname: parsed.firstname, lastname: parsed.lastname, email: parsed.email, mobileno: parsed.mobileno })
-
-
-    //     } catch (error) {
-    //         alert(error);
-    //     }
-    // };
 
     componentDidMount() {
-
-
-        // let obj = {
-        //   name: 'utsav',
-        //   email: 'utsav@gmail.com',
-        //   password: 'Ut$av1234',
-        // };
-        /*AsyncStorage.setItem('user',user);*/
-        // AsyncStorage.setItem('user', JSON.stringify(obj));
         this.checkAuth();
     }
 
