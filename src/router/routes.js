@@ -12,6 +12,7 @@ const Routes={
     Bottomtab:'Bottomtab',
     DrawerScreen:'DrawerScreen',
     GiphyScreen:'GiphyScreen',
+    TabBar:'TabBar',
 }
 
 export default Routes;

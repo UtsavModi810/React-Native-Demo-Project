@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import GiphyScreen from '../Screen/GiphyScreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import TabBar from '../Screen/TabBar';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -34,7 +35,6 @@ const NavigationDrawerStructure = (props) => {
     <View style={{flexDirection: 'row'}}>
       <TouchableOpacity onPress={() => toggleDrawer()}>
         <Icon name="menu" color="#000" size={35} style={{marginLeft: 20}} />
-        
       </TouchableOpacity>
     </View>
   );
@@ -114,14 +114,14 @@ const HomeScreenStack = ({navigation}) => {
           ),
         })}
       />
-        <Stack.Screen
+      <Stack.Screen
         name={Routes.HomeDetail}
         component={HomeDetail}
         options={{
           title: 'HomeDetail',
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name={Routes.UserProfile}
         component={UserProfile}
         options={{
@@ -141,12 +141,12 @@ const SettingScreenStack = ({navigation}) => {
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
         title: 'setting',
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
 
-          headerTintColor: '#000',
-          headerTitleAlign: 'center',
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
       }}>
       <Stack.Screen
         name={Routes.Setting}
@@ -159,8 +159,8 @@ const SettingScreenStack = ({navigation}) => {
   );
 };
 
-const GiphyScreenStack = ({navigation}) =>{
-  return(
+const GiphyScreenStack = ({navigation}) => {
+  return (
     <Stack.Navigator
       initialRouteName={Routes.GiphyScreen}
       screenOptions={{
@@ -168,12 +168,12 @@ const GiphyScreenStack = ({navigation}) =>{
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
         title: 'Giphy',
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
 
-          headerTintColor: '#000',
-          headerTitleAlign: 'center',
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
       }}>
       <Stack.Screen
         name={Routes.GiphyScreen}
@@ -183,8 +183,35 @@ const GiphyScreenStack = ({navigation}) =>{
         }}
       />
     </Stack.Navigator>
-  )
-}
+  );
+};
+
+const TabBarStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={Routes.TabBar}
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        title: 'TabBar',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name={Routes.TabBar}
+        component={TabBar}
+        options={{
+          title: 'TabBar',
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const Authenticate = () => {
   return (
@@ -204,6 +231,11 @@ const Authenticate = () => {
         name="Giphy Screen"
         options={{drawerLabel: 'Giphy'}}
         component={GiphyScreenStack}
+      />
+      <Drawer.Screen
+        name="TabBar Screen"
+        options={{drawerLabel: 'TabBar'}}
+        component={TabBarStack}
       />
     </Drawer.Navigator>
   );
