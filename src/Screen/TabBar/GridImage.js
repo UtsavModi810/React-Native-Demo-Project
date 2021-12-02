@@ -27,10 +27,3 @@ const GridImage = ({ image, width }) => {
 
 export default GridImage;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
