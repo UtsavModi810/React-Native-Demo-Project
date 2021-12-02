@@ -18,7 +18,7 @@ const GridImage = ({ image, width }) => {
           flex: 1,
           height: null,
           width: null,
-          // borderRadius: width / 2 - 20 / 2
+          resizeMode:'stretch'
         }}
       />
     </View>

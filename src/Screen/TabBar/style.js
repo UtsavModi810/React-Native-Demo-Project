@@ -25,6 +25,16 @@ const styles=StyleSheet.create({
         flexWrap:'wrap',
         justifyContent:'space-around',
     },
+    editAccount: {
+        alignSelf: 'center',
+        position: 'absolute',
+        width: '100%',
+        paddingHorizontal: 20,
+        paddingVertical: 20,
+        backgroundColor: 'white',
+        borderRadius:20,
+        marginHorizontal:'10%',
+      },
     
 })
 

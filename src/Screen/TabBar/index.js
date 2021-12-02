@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
-import {Text, TouchableOpacity, View, Dimensions, TouchableWithoutFeedback} from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  Dimensions,
+  TouchableWithoutFeedback,
+  ScrollView,
+  Pressable,
+  Modal,
+  Image,
+} from 'react-native';
 import styles from './style';
 import Tab from '../../component/Tab';
 import {Transition, Transitioning} from 'react-native-reanimated';
 import {images} from '../../utils/contstant';
 import GridImage from './GridImage';
-
+import Icon from 'react-native-vector-icons/dist/Ionicons';
 
 const {width} = Dimensions.get('window');
 
@@ -15,6 +25,8 @@ class TabBar extends Component {
     this.state = {
       selectedTab: 0,
       images: images,
+      modalVisible: false,
+      preview: '',
     };
     this.ref = React.createRef();
   }
@@ -22,6 +34,11 @@ class TabBar extends Component {
   selectTab = (tabIndex) => {
     this.ref.current.animateNextTransition();
     this.setState({selectedTab: tabIndex});
+  };
+
+  previewImage = (image) => {
+    console.log('image', image);
+    this.setState({modalVisible: true, preview: image.uri});
   };
 
   transition = (
@@ -56,6 +73,8 @@ class TabBar extends Component {
   };
 
   render() {
+    // if (!this.state.modalVisible)
+    // return null
     return (
       <Transitioning.View
         style={styles.container}
@@ -86,65 +105,119 @@ class TabBar extends Component {
             />
           </TouchableOpacity>
         </View>
-        {this.state.selectedTab == 0 ? (
-          <View style={styles.imageContainer}>
-            {this.state.images.map((image, index) => (
-              <GridImage key={image.id} image={image} width={width / 2 - 20} />
-            ))}
-          </View>
-        ) : (
-          <View style={styles.imageContainer}>
-            {this.state.images.map((image, index) => (
-              <GridImage key={image.id} image={image} width={width / 4 - 20} />
-            ))}
-          </View>
-        )}
-        {this.state.selectedTab == 0 && (
-          <View
-            style={{
-              marginBottom: 80,
-              alignItems: 'center',
-              justifyContent: 'center',
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {this.state.selectedTab == 0 ? (
+            <View style={styles.imageContainer}>
+              {this.state.images.map((image, index) => (
+                <Pressable onPress={() => this.previewImage(image)}>
+                  <GridImage
+                    key={image.id}
+                    image={image}
+                    width={width / 2 - 20}
+                  />
+                </Pressable>
+              ))}
+            </View>
+          ) : (
+            <View style={styles.imageContainer}>
+              {this.state.images.map((image, index) => (
+                <Pressable onPress={() => this.previewImage(image)}>
+                <GridImage
+                  key={image.id}
+                  image={image}
+                  width={width / 3 - 20}
+                />
+                </Pressable>
+              ))}
+            </View>
+          )}
+
+          <TouchableWithoutFeedback
+            onPress={() => {
+              this.deleteImages(this.state.images);
             }}>
-            <Text>Images</Text>
-          </View>
-        )}
-        <TouchableWithoutFeedback
-          onPress={() => {
-            this.deleteImages(this.state.images);
-          }}>
-          <View
-            style={{
-              height: 70,
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              bottom: this.state.selectedTab == 0 ? -70 : 0,
-              backgroundColor: 'red',
-              alignItems: 'center',
-              justifyContent: 'center',
+            <View
+              style={{
+                height: 70,
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: this.state.selectedTab == 0 ? -70 : 0,
+                backgroundColor: 'red',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{fontSize: 24, color: 'white'}}>Delete Images</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              this.randomizeImages(this.state.images);
             }}>
-            <Text style={{fontSize: 24, color: 'white'}}>Delete Images</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback
-          onPress={() => {
-            this.randomizeImages(this.state.images);
-          }}>
-          <View
-            style={{
-              height: 70,
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              bottom: this.state.selectedTab == 0 ? 0 : -70,
-              backgroundColor: 'red',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text style={{fontSize: 24, color: 'white'}}>Randomize Text</Text>
-          </View>
-        </TouchableWithoutFeedback>
+            <View
+              style={{
+                height: 70,
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: this.state.selectedTab == 0 ? 0 : -70,
+                backgroundColor: 'red',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{fontSize: 24, color: 'white'}}>Randomize Text</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        </ScrollView>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() =>
+            this.setState({modalVisible: !this.state.modalVisible})
+          }> 
+            <View
+              style={{
+                backgroundColor: '#000000aa',
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+                <View style={styles.editAccount}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
+                    <Text>PREVIEW IMAGE</Text>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.setState({
+                          modalVisible: false
+                        })
+                      }>
+                      <Icon
+                        name="close"
+                        size={25}
+                        style={{alignSelf: 'center'}}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{marginVertical: 20}}>
+                    {this.state.preview != '' && (
+                      <Image
+                        source={this.state.preview}
+                        resizeMode="contain"
+                        style={{
+                          height: 200,
+                          width: 300,
+                        }}
+                      />
+                    )}
+                  </View>
+                </View>
+            </View>
+        </Modal>
       </Transitioning.View>
     );
   }
