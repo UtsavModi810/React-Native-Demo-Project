@@ -109,24 +109,33 @@ class TabBar extends Component {
           {this.state.selectedTab == 0 ? (
             <View style={styles.imageContainer}>
               {this.state.images.map((image, index) => (
-                <Pressable onPress={() => this.previewImage(image)}>
-                  <GridImage
-                    key={image.id}
-                    image={image}
-                    width={width / 2 - 20}
-                  />
+                <Pressable key={index}
+                  style={({pressed}) => [
+                    {
+                      borderWidth: pressed ? 3 : 0,
+                      borderColor: pressed ? 'black' : 'white',
+                    },
+                  ]}
+                  onPress={() => this.previewImage(image)}>
+                  {({pressed}) => (
+                    <GridImage
+                      key={image.id}
+                      image={image}
+                      width={width / 2 - 20}
+                    />
+                  )}
                 </Pressable>
               ))}
             </View>
           ) : (
             <View style={styles.imageContainer}>
               {this.state.images.map((image, index) => (
-                <Pressable onPress={() => this.previewImage(image)}>
-                <GridImage
-                  key={image.id}
-                  image={image}
-                  width={width / 3 - 20}
-                />
+                <Pressable key={index} onPress={() => this.previewImage(image)}>
+                  <GridImage
+                    key={image.id}
+                    image={image}
+                    width={width / 3 - 20}
+                  />
                 </Pressable>
               ))}
             </View>
@@ -175,48 +184,46 @@ class TabBar extends Component {
           visible={this.state.modalVisible}
           onRequestClose={() =>
             this.setState({modalVisible: !this.state.modalVisible})
-          }> 
-            <View
-              style={{
-                backgroundColor: '#000000aa',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                <View style={styles.editAccount}>
-                  <View
+          }>
+          <View
+            style={{
+              backgroundColor: '#000000aa',
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View style={styles.editAccount}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <Text>PREVIEW IMAGE</Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({
+                      modalVisible: false,
+                    })
+                  }>
+                  <Icon name="close" size={25} style={{alignSelf: 'center'}} />
+                </TouchableOpacity>
+              </View>
+              <View style={{marginVertical: 20,alignItems:'center'}}>
+                {this.state.preview != '' && (
+                  <Image
+                    source={this.state.preview}
+                    resizeMode="contain"
                     style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}>
-                    <Text>PREVIEW IMAGE</Text>
-                    <TouchableOpacity
-                      onPress={() =>
-                        this.setState({
-                          modalVisible: false
-                        })
-                      }>
-                      <Icon
-                        name="close"
-                        size={25}
-                        style={{alignSelf: 'center'}}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                  <View style={{marginVertical: 20}}>
-                    {this.state.preview != '' && (
-                      <Image
-                        source={this.state.preview}
-                        resizeMode="contain"
-                        style={{
-                          height: 200,
-                          width: 300,
-                        }}
-                      />
-                    )}
-                  </View>
-                </View>
+                      // justifyContent:'center',
+                      // alignItems:'center',
+                      height: 200,
+                      width: 300,
+                    }}
+                  />
+                )}
+              </View>
             </View>
+          </View>
         </Modal>
       </Transitioning.View>
     );
