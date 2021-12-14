@@ -19,6 +19,7 @@ import GiphyScreen from '../Screen/GiphyScreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TabBar from '../Screen/TabBar';
+import SwipeCard from '../Screen/SwipeCard';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -213,6 +214,33 @@ const TabBarStack = ({navigation}) => {
   );
 };
 
+const SwipeCardStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={Routes.SwipeCard}
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        title: 'SwipeCard',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name={Routes.SwipeCard}
+        component={SwipeCard}
+        options={{
+          title: 'SwipeCard',
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const Authenticate = () => {
   return (
     <Drawer.Navigator>
@@ -236,6 +264,11 @@ const Authenticate = () => {
         name="TabBar Screen"
         options={{drawerLabel: 'TabBar'}}
         component={TabBarStack}
+      />
+        <Drawer.Screen
+        name="Swipe Screen"
+        options={{drawerLabel: 'SwipeCard'}}
+        component={SwipeCardStack}
       />
     </Drawer.Navigator>
   );

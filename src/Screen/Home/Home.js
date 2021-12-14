@@ -12,11 +12,13 @@ import {
 } from 'react-native';
 import styles from './style';
 import Right from 'react-native-vector-icons/dist/MaterialIcons';
-import {fetchUserRequest} from '../../Redux/action';
+// import {fetchUserRequest} from '../../Redux/action';
+import { homeAction } from '../../Redux/reducer/common/action';
 import {connect} from 'react-redux';
 import HomeDetail from '../HomeDetail/HomeDetail';
 
 import ComponentButton from '../../component/Button/ComponentButton';
+import { bindActionCreators } from 'redux';
 
 class Home extends React.Component {
   constructor(props) {
@@ -26,23 +28,20 @@ class Home extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.props.fetchUserRequest();
-  }
-
   onRefresh = () => {
     this.setState({refreshing: true});
-    this.props.fetchUserRequest();
+    this.props.homeAction();
     this.setState({refreshing: false});
   };
-
+0
   render() {
+    console.log('123',this.props.home)
     return (
       <View style={styles.container}>
         <FlatList
           numColumns={1}
           keyExtractor={(item) => item.id.toString()}
-          data={this.props.data}
+          data={this.props.home}
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
@@ -53,15 +52,17 @@ class Home extends React.Component {
           renderItem={({item}) => {
             return (
               <SafeAreaView style={{flex: 1}}>
+                 <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('HomeDetail', item)
+                    }>
                 <View style={styles.show}>
                   <Image style={styles.img} source={{uri: item.avatar}}></Image>
                   <View style={styles.text}>
                     <Text style={styles.item}>{item.email}</Text>
                   </View>
-                  <TouchableOpacity
-                    onPress={() =>
-                      this.props.navigation.navigate('HomeDetail', item)
-                    }>
+                  <View>
+                 
                     <Right
                       name="keyboard-arrow-right"
                       style={{
@@ -71,8 +72,10 @@ class Home extends React.Component {
                         color: 'white',
                       }}
                     />
-                  </TouchableOpacity>
+                  
+                  </View>
                 </View>
+                </TouchableOpacity>
               </SafeAreaView>
             );
           }}
@@ -81,17 +84,21 @@ class Home extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    loading: state.loading,
-    data: state.data.data,
-    error: state.error,
+    home:state.common.home
+    // loading: state.loading,
+    // data: state.data.data,
+    // error: state.error,
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchUserRequest: () => dispatch(fetchUserRequest()),
-  };
-};
+const mapDispatchToProps = dispatch => 
+  bindActionCreators(
+    {
+      homeAction,
+    },
+    dispatch,
+  ) 
+ 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

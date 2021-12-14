@@ -13,6 +13,7 @@ const Routes={
     DrawerScreen:'DrawerScreen',
     GiphyScreen:'GiphyScreen',
     TabBar:'TabBar',
+    SwipeCard:'SwipeCard',
 }
 
 export default Routes;
