@@ -35,6 +35,11 @@ const commonReducer = (state = initial, action) => {
           ...state,
         }; 
       }
+    case types.CLEAR:
+      return{
+        ...state,
+        stateValue:0
+      }
       
 
     default:

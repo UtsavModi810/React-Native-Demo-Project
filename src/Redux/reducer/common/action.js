@@ -18,3 +18,9 @@ export const decrementAction = () =>{
         type:types.DECREMENT
     }
 }
+
+export const clearAction = ()=>{
+    return{
+        type:types.CLEAR
+    }
+}

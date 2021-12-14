@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {SafeAreaView, Text, View} from 'react-native';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import ComponentButton from '../../component/Button/ComponentButton';
+import {clearAction} from '../../Redux/reducer/common/action'
 
 class IncrementDecrement extends Component {
-   
   render() {
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -26,15 +28,26 @@ class IncrementDecrement extends Component {
             <Text> Show Value </Text>
             <Text>= {this.props.value.stateValue}</Text>
           </View>
+          <View style={{marginVertical: 10}}>
+            <ComponentButton label="Clear" onPress={this.props.clearAction} />
+          </View>
         </View>
       </SafeAreaView>
     );
   }
 }
-const mapstatetopropss = (state) =>{
-  return{
-    value:state.common,
-  }
-}
+const mapStateToProps = (state) => {
+  return {
+    value: state.common,
+  };
+};
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      clearAction,
+    },
+    dispatch,
+  );
 
-export default connect(mapstatetopropss)(IncrementDecrement);
+
+export default connect(mapStateToProps,mapDispatchToProps)(IncrementDecrement);
