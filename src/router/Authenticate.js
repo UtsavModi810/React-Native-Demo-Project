@@ -20,6 +20,9 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TabBar from '../Screen/TabBar';
 import SwipeCard from '../Screen/SwipeCard';
+import Increment from '../Screen/Increment';
+import Decrement from '../Screen/Decrement';
+import IncrementDecrement from '../Screen/IncrementDecrement';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -241,6 +244,87 @@ const SwipeCardStack = ({navigation}) => {
   );
 };
 
+const IncrementStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={Routes.Increment}
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        title: 'Increment',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name={Routes.Increment}
+        component={Increment}
+        options={{
+          title: 'Increment',
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const DecrementStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={Routes.Decrement}
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        title: 'Decrement',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name={Routes.Decrement}
+        component={Decrement}
+        options={{
+          title: 'Decrement',
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const IncrementDecrementStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={Routes.IncrementDecrement}
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        title: 'IncrementDecrement',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name={Routes.IncrementDecrement}
+        component={IncrementDecrement}
+        options={{
+          title: 'IncrementDecrement',
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const Authenticate = () => {
   return (
     <Drawer.Navigator>
@@ -265,10 +349,28 @@ const Authenticate = () => {
         options={{drawerLabel: 'TabBar'}}
         component={TabBarStack}
       />
-        <Drawer.Screen
+      <Drawer.Screen
         name="Swipe Screen"
         options={{drawerLabel: 'SwipeCard'}}
         component={SwipeCardStack}
+      />
+
+      <Drawer.Screen
+        name="Increment Screen"
+        options={{drawerLabel: 'Increment'}}
+        component={IncrementStack}
+      />
+
+      <Drawer.Screen
+        name="Decrement Screen"
+        options={{drawerLabel: 'Decrement'}}
+        component={DecrementStack}
+      />
+
+      <Drawer.Screen
+        name="IncrementDecrement Screen"
+        options={{drawerLabel: 'IncrementDecrement'}}
+        component={IncrementDecrementStack}
       />
     </Drawer.Navigator>
   );

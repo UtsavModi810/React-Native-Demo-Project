@@ -2,6 +2,7 @@ import * as types from '../../constants/action-types';
 
 const initial = {
   home: [],
+  stateValue: 0,
 };
 
 const commonReducer = (state = initial, action) => {
@@ -17,6 +18,25 @@ const commonReducer = (state = initial, action) => {
         ...state,
         home: action.payload,
       };
+    case types.INCREMENT:
+      return {
+        ...state,
+        stateValue: state.stateValue + 1,
+      };
+    case types.DECREMENT:
+      if(state.stateValue>0){
+        return {
+          ...state,
+          stateValue: state.stateValue - 1,
+        };
+      }
+      else{
+        return {
+          ...state,
+        }; 
+      }
+      
+
     default:
       return state;
   }

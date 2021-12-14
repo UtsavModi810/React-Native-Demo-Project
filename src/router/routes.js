@@ -14,6 +14,9 @@ const Routes={
     GiphyScreen:'GiphyScreen',
     TabBar:'TabBar',
     SwipeCard:'SwipeCard',
+    Increment:'Increment',
+    Decrement:'Decrement',
+    IncrementDecrement:'IncrementDecrement',
 }
 
 export default Routes;

@@ -5,6 +5,7 @@ import apiUrl from '../../services/serverEndpoints';
 
 
 export function* homeUser(action){
+    debugger
     try{
         const result = yield call(callService,{
             url:apiUrl.Home,
@@ -20,6 +21,7 @@ export function* homeUser(action){
         }
     }
     catch(error){
+        debugger
       console.log(error,'error')
 
     }
