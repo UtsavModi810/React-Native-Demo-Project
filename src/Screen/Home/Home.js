@@ -33,7 +33,7 @@ class Home extends React.Component {
     this.props.homeAction();
     this.setState({refreshing: false});
   };
-0
+
   render() {
     console.log('123',this.props.home)
     return (
