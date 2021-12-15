@@ -21,7 +21,6 @@ const mapDispatchToProps = (dispatch) =>
 
 class Increment extends Component {
   render() {
-    console.log('increment',this.props.value)
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View

@@ -24,3 +24,11 @@ export const clearAction = ()=>{
         type:types.CLEAR
     }
 }
+
+export const todoAction = (param) =>{
+    return{
+        type:types.TODO,
+        payload:{param},
+
+    }
+}

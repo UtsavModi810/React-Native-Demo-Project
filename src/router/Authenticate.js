@@ -23,6 +23,7 @@ import SwipeCard from '../Screen/SwipeCard';
 import Increment from '../Screen/Increment';
 import Decrement from '../Screen/Decrement';
 import IncrementDecrement from '../Screen/IncrementDecrement';
+import ToDo from '../Screen/ToDo';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -325,6 +326,33 @@ const IncrementDecrementStack = ({navigation}) => {
   );
 };
 
+const ToDoStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={Routes.ToDo}
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        title: 'ToDo',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name={Routes.ToDo}
+        component={ToDo}
+        options={{
+          title: 'ToDo',
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const Authenticate = () => {
   return (
     <Drawer.Navigator>
@@ -371,6 +399,12 @@ const Authenticate = () => {
         name="IncrementDecrement Screen"
         options={{drawerLabel: 'IncrementDecrement'}}
         component={IncrementDecrementStack}
+      />
+
+<Drawer.Screen
+        name="ToDo Screen"
+        options={{drawerLabel: 'ToDo'}}
+        component={ToDoStack}
       />
     </Drawer.Navigator>
   );

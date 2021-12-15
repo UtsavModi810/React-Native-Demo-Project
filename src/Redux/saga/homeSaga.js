@@ -14,7 +14,6 @@ export function* homeUser(action){
 
         });
         debugger
-        console.log('result',result.Result.data)
         if(result.isSucess){
             debugger
             yield put({type:types.HOME_SUCCESS,payload:result.Result.data})

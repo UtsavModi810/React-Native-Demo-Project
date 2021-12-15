@@ -4,8 +4,7 @@ import styles from './style';
 import * as Animatable from 'react-native-animatable';
 
 function HomeDetail({  route }) {
-    const { avatar, title, email } = route.params;
-
+    const { avatar, email,first_name,last_name } = route.params;
 
     return (
         <ScrollView>
@@ -15,7 +14,7 @@ function HomeDetail({  route }) {
                 </View>
                 <Animatable.View style={styles.footer} animation="fadeInUpBig" iterationDelay={500}>
                     <Image style={styles.img} source={{uri : avatar}} />
-                    <Text style={styles.text1}>{title}</Text>
+                    <Text style={styles.text1}>{first_name}{'  '}{last_name}</Text>
                     <Text style={styles.text1}>{email}</Text>
                 </Animatable.View>
             </View>

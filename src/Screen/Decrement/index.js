@@ -18,9 +18,7 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 class Decrement extends Component {
-
   render() {
-    console.log('decrement',this.props.value.stateValue)
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View

@@ -23,7 +23,7 @@ class Home extends React.Component {
   }
 
   componentDidMount(){
-    this.props.homeAction();
+    this.onRefresh();
   }
 
   onRefresh = () => {
@@ -33,7 +33,6 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log('123', this.props.home);
     return (
       <View style={styles.container}>
         <FlatList
@@ -41,6 +40,7 @@ class Home extends React.Component {
           keyExtractor={(item) => item.id.toString()}
           data={this.props.home}
           showsVerticalScrollIndicator={false}
+          refreshing={true}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
@@ -59,6 +59,7 @@ class Home extends React.Component {
                       style={styles.img}
                       source={{uri: item.avatar}}></Image>
                     <View style={styles.text}>
+                    <Text style={styles.item}>{item.first_name}{'  '}{item.last_name}</Text>
                       <Text style={styles.item}>{item.email}</Text>
                     </View>
                     <View>
@@ -83,7 +84,6 @@ class Home extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log('state',state.common)
   return {
     home: state.common.home,
   };
@@ -94,6 +94,6 @@ const mapDispatchToProps = (dispatch) =>
       homeAction,
     },
     dispatch,
-  );
+  ); 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
