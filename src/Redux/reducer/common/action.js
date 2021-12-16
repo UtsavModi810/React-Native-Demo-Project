@@ -32,3 +32,10 @@ export const todoAction = (param) =>{
 
     }
 }
+
+export const todoClearAction = (id) =>{
+    return{
+        type:types.TODO_CLEAR,
+        payload:id,
+    }
+}

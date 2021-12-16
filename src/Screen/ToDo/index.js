@@ -5,22 +5,22 @@ import ComponentButton from '../../component/Button/ComponentButton';
 import Input from '../../component/Input/Input';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {connect} from 'react-redux';
-import { bindActionCreators } from 'redux';
-import {todoAction} from '../../Redux/reducer/common/action';
+import {bindActionCreators} from 'redux';
+import {todoAction, todoClearAction} from '../../Redux/reducer/common/action';
 
 const mapStateToProps = (state) => {
-    return {
-      todo: state.common.todo,
-    };
+  return {
+    todo: state.common.todo,
   };
-  const mapDispatchToProps = (dispatch) =>
-    bindActionCreators(
-      {
-        todoAction,
-      },
-      dispatch,
-    );
-
+};
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      todoAction,
+      todoClearAction,
+    },
+    dispatch,
+  );
 
 class ToDo extends Component {
   constructor() {
@@ -32,17 +32,15 @@ class ToDo extends Component {
     };
   }
 
-
-
   submit = () => {
     let arr = this.props.todo.length;
 
-    let param ={
-        id:arr,
-        name: this.state.name,
-        subject: this.state.subject
-    }
-    this.props.todoAction(param)
+    let param = {
+      id: arr,
+      name: this.state.name,
+      subject: this.state.subject,
+    };
+    this.props.todoAction(param);
 
     //          Without redux code
     //   let arr = this.state.Sample.length;
@@ -55,15 +53,23 @@ class ToDo extends Component {
     this.setState({name: '', subject: ''});
   };
 
-//   delete = (id) => {
-//     console.log('id', id);
-//     const data = this.state.Sample.splice(id, 1);
-//     this.setState({sample: data});
-//   };
+  delete = (id) => {
+    let deleteid = id['id'];
+    console.log('delete', deleteid);
+    // let param = {
+    //   id: deleteid,
+    //   // id=Object.values(deleteid)
+    // };
+
+    this.props.todoClearAction(deleteid);
+    // console.log('param', param);
+    // console.log('id', id);
+    // const data = this.state.Sample.splice(id, 1);
+    // this.setState({sample: data});
+  };
 
   render() {
-
-    console.log('action',this.props.todo)
+    console.log('action', this.props.todo);
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <View style={{flex: 1, backgroundColor: 'pink'}}>
@@ -90,7 +96,7 @@ class ToDo extends Component {
               data={this.props.todo}
               showsVerticalScrollIndicator={false}
               renderItem={({item, index}) => {
-                  console.log('item',item)
+                console.log('item', item);
                 return (
                   <View style={{flex: 1, marginHorizontal: 10}}>
                     <View
@@ -126,7 +132,7 @@ class ToDo extends Component {
                         <Text small>{item.subject}</Text>
                       </View>
                       <View style={{justifyContent: 'center'}}>
-                        <TouchableOpacity onPress={() => alert('hello')}>
+                        <TouchableOpacity onPress={()=>this.delete(item)}>
                           <Icon name="delete" size={25} color="black" />
                         </TouchableOpacity>
                       </View>
@@ -142,4 +148,4 @@ class ToDo extends Component {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ToDo);
+export default connect(mapStateToProps, mapDispatchToProps)(ToDo);

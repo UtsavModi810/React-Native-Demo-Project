@@ -43,16 +43,28 @@ const commonReducer = (state = initial, action) => {
     case types.TODO: {
       let qq = action.payload.param;
       debugger;
-      let arr = state.todo
-      debugger
-      arr.push(qq)
+      let arr = state.todo;
+      debugger;
+      arr.push(qq);
       debugger;
       return {
         ...state,
-        todo:arr
-       
+        todo: arr,
       };
     }
+    case types.TODO_CLEAR: {
+      let id = action.payload
+      console.log('id',id)
+      let newArr=[]
+      let arr= state.todo.map((item)=>{if(item.id!==id){
+        newArr.push(item)
+      }})
+      return {
+        ...state,
+        todo: newArr,
+      };
+    }
+
     default:
       return state;
   }
