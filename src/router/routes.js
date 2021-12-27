@@ -18,6 +18,8 @@ const Routes={
     Decrement:'Decrement',
     IncrementDecrement:'IncrementDecrement',
     ToDo:'ToDo',
+    Quote:'Quote',
+    Contact:'Contact',
 }
 
 export default Routes;

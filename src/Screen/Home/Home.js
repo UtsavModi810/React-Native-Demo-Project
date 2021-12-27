@@ -33,6 +33,7 @@ class Home extends React.Component {
   };
 
   render() {
+    console.log('item',this.props.home);
     return (
       <View style={styles.container}>
         <FlatList

@@ -4,6 +4,7 @@ const initial = {
   home: [],
   stateValue: 0,
   todo: [],
+  quote:{},
 };
 
 const commonReducer = (state = initial, action) => {
@@ -58,12 +59,24 @@ const commonReducer = (state = initial, action) => {
       let newArr=[]
       let arr= state.todo.map((item)=>{if(item.id!==id){
         newArr.push(item)
+        return item
       }})
       return {
         ...state,
         todo: newArr,
       };
     }
+
+    case types.QUOTE:
+      return{
+        ...state,
+        // quote:action.payload
+      }
+    case types.QUOTE_SUCCESS:
+      return{
+        ...state,
+        quote:action.payload
+      };
 
     default:
       return state;

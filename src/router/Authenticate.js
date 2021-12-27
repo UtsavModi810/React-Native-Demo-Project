@@ -24,6 +24,8 @@ import Increment from '../Screen/Increment';
 import Decrement from '../Screen/Decrement';
 import IncrementDecrement from '../Screen/IncrementDecrement';
 import ToDo from '../Screen/ToDo';
+import Quote from '../Screen/Quote';
+import Contact from '../Screen/Contact';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -353,6 +355,60 @@ const ToDoStack = ({navigation}) => {
   );
 };
 
+const QuoteStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={Routes.Quote}
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        title: 'Quote',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name={Routes.Quote}
+        component={Quote}
+        options={{
+          title: 'ToDo',
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ContactStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={Routes.Contact}
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        title: 'Contact',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+
+        headerTintColor: '#000',
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name={Routes.Contact}
+        component={Contact}
+        options={{
+          title: 'Contact',
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const Authenticate = () => {
   return (
     <Drawer.Navigator>
@@ -401,10 +457,22 @@ const Authenticate = () => {
         component={IncrementDecrementStack}
       />
 
-<Drawer.Screen
+      <Drawer.Screen
         name="ToDo Screen"
         options={{drawerLabel: 'ToDo'}}
         component={ToDoStack}
+      />
+
+      <Drawer.Screen
+        name="Quote Screen"
+        options={{drawerLabel: 'Quote'}}
+        component={QuoteStack}
+      />
+
+      <Drawer.Screen
+        name="Contact Screen"
+        options={{drawerLabel: 'Contact'}}
+        component={ContactStack}
       />
     </Drawer.Navigator>
   );

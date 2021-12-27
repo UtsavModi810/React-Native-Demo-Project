@@ -4,11 +4,11 @@ import {callService} from '../../services';
 import apiUrl from '../../services/serverEndpoints';
 
 
-export function* homeUser(action){
+export function* quoteUser(action){
     debugger
     try{
         const result = yield call(callService,{
-            url:`https://reqres.in/api/users`,
+            url:`https://api.quotable.io/random`,
             method:'GET',
             // params:action.payload
 
@@ -16,7 +16,7 @@ export function* homeUser(action){
         debugger
         if(result.isSucess){
             debugger
-            yield put({type:types.HOME_SUCCESS,payload:result.Result.data})
+            yield put({type:types.QUOTE_SUCCESS,payload:result.Result})
         }
     }
     catch(error){

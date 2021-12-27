@@ -39,3 +39,10 @@ export const todoClearAction = (id) =>{
         payload:id,
     }
 }
+
+
+export const quoteAction = () =>{
+    return{
+        type:types.QUOTE,
+    }
+}

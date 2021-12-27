@@ -1,9 +1,11 @@
 import * as types from '../constants/action-types';
-import { takeEvery } from 'redux-saga/effects';
+import { takeEvery, takeLatest } from 'redux-saga/effects';
 import { homeUser } from './homeSaga';
+import { quoteUser } from './quoteSaga';
 
 function* rootSaga(){
-    yield takeEvery(types.HOME,homeUser);
+    yield takeLatest(types.HOME,homeUser);
+    yield takeLatest(types.QUOTE,quoteUser);
 }
 
 export default rootSaga;

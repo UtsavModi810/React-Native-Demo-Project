@@ -8,6 +8,8 @@ target 'Register' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
+
   target 'RegisterTests' do
     inherit! :complete
     # Pods for testing
